@@ -6,12 +6,14 @@ import {
   Outlet,
   useNavigate,
 } from 'react-router-dom'
+import Dashboard from './pages/Dashboard.jsx'
 function App() {
   return (
     <div>
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Layout />}>
+            <Route path='/dashboard' element={<Dashboard />} />
             <Route
               path='/neet/online-coaching-class-11'
               element={<Class11Program />}
@@ -32,14 +34,26 @@ function App() {
 
 function Layout() {
   return (
-    <div style={{ height: '100vh' }}>
-      <Link to='/'>Allen</Link>|
-      <Link to='/neet/online-coaching-class-11'>Class 11</Link>|
-      <Link to='/neet/online-coaching-class-12'>Class 12</Link>
-      <div style={{ height: '90vh' }}>
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+      <nav className='nav'>
+        <div className='container nav-inner'>
+          <Link to='/' className='logo' aria-label='Allen App Home'>
+            <span style={{ width: 10, height: 10, background: 'var(--color-primary)', borderRadius: 2 }} />
+            Allen
+          </Link>
+          <div className='nav-links'>
+            <Link to='/dashboard' className='btn btn-primary'>Dashboard</Link>
+            <Link to='/neet/online-coaching-class-11' className='btn'>Class 11</Link>
+            <Link to='/neet/online-coaching-class-12' className='btn'>Class 12</Link>
+          </div>
+        </div>
+      </nav>
+      <div style={{ flex: 1 }}>
         <Outlet />
       </div>
-      footer
+      <footer className='footer'>
+        <div className='container'>Footer · Contact us</div>
+      </footer>
     </div>
   )
 }
